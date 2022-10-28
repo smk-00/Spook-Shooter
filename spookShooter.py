@@ -39,8 +39,11 @@ while True:
             RUN = False
 
     C_PLAYER.move(ENVIRONMENT)
+    C_PLAYER.weapon.attachWithPlayer([C_PLAYER.x, C_PLAYER.y])
+    C_PLAYER.weapon.checkFire()
 
     ENVIRONMENT.draw(WINDOW)
+    C_PLAYER.weapon.draw(WINDOW)
     C_PLAYER.draw(WINDOW)
 
     pg.display.update() 
