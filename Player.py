@@ -7,6 +7,7 @@ class Player(object):
         self.x = 20
         self.y = 20
         self.life = 5
+        self.bar = 100
         self.scr = 0
         self.jump = False
         self.height = height
