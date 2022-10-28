@@ -25,7 +25,7 @@ pg.display.set_caption("Soppky Shooter")
 # Game instance
 ENVIRONMENT = Environment(
                             musicPath="./assets/environment/bg_music.mp3",
-                            level=2,
+                            level=1,
                             width=screen_w,
                             height=screen_h
                         )
@@ -46,7 +46,7 @@ for i in range(6):
 loadScreen = pg.image.load("./assets/start/bg.png")
 loadScreen = pg.transform.scale(loadScreen, (screen_w, screen_h))
 hiscores = pickle.load(open('highscore.txt',"rb"))
-game_over_music = pg.mixer.Sound("./asset/game_over.wav")
+game_over_music = pg.mixer.Sound("./assets/game_over.wav")
 
 GAME_START = True
 GAME_RUN = False
@@ -96,6 +96,29 @@ while GAME_START:
 
         ENVIRONMENT.draw(WINDOW)
         C_PLAYER.draw(WINDOW)
+
+        if(len(ENEMYS) == 0):
+            ENVIRONMENT.level += 1
+            ENVIRONMENT.loadlevel()
+            for i in range(6):
+                if(ENVIRONMENT.level == 2):
+                    if(i%2):
+                        E_PLAYER_M = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(3, 7), e_type='zombie', height=180, width=60,
+                                images=['./assets/enemy/zombie_m/1.png','./assets/enemy/zombie_m/2.png','./assets/enemy/zombie_m/3.png','./assets/enemy/zombie_m/4.png','./assets/enemy/zombie_m/5.png','./assets/enemy/zombie_m/6.png'])
+                        ENEMYS.append(E_PLAYER_M)
+                    else:
+                        E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(4, 7), e_type='zombie', height=100, width=60,
+                                images=['./assets/enemy/zombie_f/1.png','./assets/enemy/zombie_f/2.png','./assets/enemy/zombie_f/3.png','./assets/enemy/zombie_f/4.png','./assets/enemy/zombie_f/5.png','./assets/enemy/zombie_f/6.png'])
+                        ENEMYS.append(E_PLAYER_F)
+                if(ENVIRONMENT.level == 3):
+                    if(i%2):
+                        E_PLAYER_M = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(4, 7), e_type='zombie', height=180, width=60,
+                                images=['./assets/enemy/zombie_m/1.png','./assets/enemy/zombie_m/2.png','./assets/enemy/zombie_m/3.png','./assets/enemy/zombie_m/4.png','./assets/enemy/zombie_m/5.png','./assets/enemy/zombie_m/6.png'])
+                        ENEMYS.append(E_PLAYER_M)
+                    else:
+                        E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(5, 7), e_type='zombie', height=100, width=60,
+                                images=['./assets/enemy/zombie_f/1.png','./assets/enemy/zombie_f/2.png','./assets/enemy/zombie_f/3.png','./assets/enemy/zombie_f/4.png','./assets/enemy/zombie_f/5.png','./assets/enemy/zombie_f/6.png'])
+                        ENEMYS.append(E_PLAYER_F)
 
         for o in ENEMYS:
             if(o.life == 0):
