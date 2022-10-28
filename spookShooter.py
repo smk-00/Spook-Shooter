@@ -31,12 +31,17 @@ ENVIRONMENT = Environment(
                         )
 
 C_PLAYER = Player(height=100, width=50, speed=10, font=font)
-E_PLAYER_M = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=3, e_type='zombie', height=100, width=60,
+
+ENEMYS = []
+for i in range(6):
+    if(i%2):
+        E_PLAYER_M = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(2, 7), e_type='zombie', height=180, width=60,
                    images=['./assets/enemy/zombie_m/1.png','./assets/enemy/zombie_m/2.png','./assets/enemy/zombie_m/3.png','./assets/enemy/zombie_m/4.png','./assets/enemy/zombie_m/5.png','./assets/enemy/zombie_m/6.png'])
-
-E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=5, speed=6, e_type='zombie', height=100, width=60,
+        ENEMYS.append(E_PLAYER_M)
+    else:
+        E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(2, 7), e_type='zombie', height=100, width=60,
                    images=['./assets/enemy/zombie_f/1.png','./assets/enemy/zombie_f/2.png','./assets/enemy/zombie_f/3.png','./assets/enemy/zombie_f/4.png','./assets/enemy/zombie_f/5.png','./assets/enemy/zombie_f/6.png'])
-
+        ENEMYS.append(E_PLAYER_F)
 
 loadScreen = pg.image.load("./assets/start/bg.png")
 loadScreen = pg.transform.scale(loadScreen, (screen_w, screen_h))
@@ -91,11 +96,15 @@ while GAME_START:
 
         ENVIRONMENT.draw(WINDOW)
         C_PLAYER.draw(WINDOW)
-        E_PLAYER_M.draw(WINDOW)
-        E_PLAYER_F.draw(WINDOW)
 
-        E_PLAYER_M.move(ENVIRONMENT, C_PLAYER)
-        E_PLAYER_F.move(ENVIRONMENT, C_PLAYER) 
+        for o in ENEMYS:
+            if(o.life == 0):
+                ENEMYS.remove(o)
+                break
+
+            o.draw(WINDOW)
+            o.move(ENVIRONMENT, C_PLAYER) 
+
         pg.display.update()
 
     for event in pg.event.get():
