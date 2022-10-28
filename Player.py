@@ -35,10 +35,10 @@ class Player(object):
         if(self.player):
             window.blit(self.player,(self.x, self.y))
 
-    def move(self):
+    def move(self, ENVIRONMENT):
         keys = pg.key.get_pressed()
-         
-        if keys[pg.K_SPACE]:
+
+        if keys[pg.K_UP]:
             self.jump = True
 
         if keys[pg.K_LEFT] and self.x > self.speed: 
@@ -62,7 +62,14 @@ class Player(object):
             else:
                 self.jump = False
                 self.jumpcount = self.speed
-
+                
         else:
             if self.y+self.height <= 640:
                 self.y += self.speed
+        
+        for i in range(len(ENVIRONMENT.platformSlides)):
+            if ((self.x > ENVIRONMENT.platformSlides[i].hitbox[0] and self.x < ENVIRONMENT.platformSlides[i].hitbox[0]+ENVIRONMENT.platformSlides[i].hitbox[2]) and (self.y < ENVIRONMENT.platformSlides[i].hitbox[1] and self.y > ENVIRONMENT.platformSlides[i].hitbox[1]-ENVIRONMENT.platformSlides[i].hitbox[3])):
+                if keys[pg.K_UP]:
+                    self.jump = True
+                else:
+                    self.y = ENVIRONMENT.platformSlides[i].hitbox[1] - ENVIRONMENT.platformSlides[i].hitbox[3]
