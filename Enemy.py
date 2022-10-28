@@ -17,7 +17,7 @@ class Enemy(object):
     def draw(self,win):
         if(self.ast_position == 3):
             self.ast_position = 0
-        player = pygame.image.load(self.enemy_assets[self.ast_position])
+        player = pg.image.load(self.enemy_assets[self.ast_position])
         win.blit(player,(self.x, self.y))
         self.ast_position += 1
         pg.display.update()
