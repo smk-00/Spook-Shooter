@@ -34,6 +34,11 @@ class Enemy(object):
         pg.display.update()
 
     def move(self,ENVIRONMENT,C_PLAYER):
+        for j in C_PLAYER.weapon.bulletsFired:
+            if ((self.x > j.cords[0] and self.x < j.cords[0]+j.width) and (self.y < j.cords[1] and self.y > j.cords[1]-j.height)):
+                self.life -= 2
+                C_PLAYER.weapon.bulletsFired.remove(j)
+    
         if self.y+self.height <= 640:
             self.y += self.speed
         
@@ -53,7 +58,7 @@ class Enemy(object):
             self.x -= self.speed
 
         if ((self.x >C_PLAYER.hitbox[0] and self.x < C_PLAYER.hitbox[0]+C_PLAYER.hitbox[2]) and (self.y < C_PLAYER.hitbox[1] and self.y > C_PLAYER.hitbox[3])):
-            print(C_PLAYER.life)
+            #print(C_PLAYER.life)
             if(C_PLAYER.life < 0):
                 C_PLAYER.life_count -= 1
                 C_PLAYER.life = 10
