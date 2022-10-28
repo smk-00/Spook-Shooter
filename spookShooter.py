@@ -59,7 +59,7 @@ while GAME_START:
             WINDOW.blit(font.render((f"{i+1}. {score}"),18,(255,255,255)), (700, 250+(25*(i+1))))
 
         WINDOW.blit(font.render(("back"),18,(255,255,255)), (612, 520))
-        
+
         pg.display.update()
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -76,7 +76,7 @@ while GAME_START:
             if event.type == pg.QUIT:
                 GAME_RUN = False
 
-        if C_PLAYER.life<=0:
+        if C_PLAYER.life_count<=0:
             c_score = C_PLAYER.scr
             hiscores.sort()
             for score in hiscores:
