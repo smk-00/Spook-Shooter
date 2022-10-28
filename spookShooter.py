@@ -1,5 +1,6 @@
 import pygame as pg
 from environment import Environment
+from player import Player
 
 
 # pygame init
@@ -22,6 +23,8 @@ ENVIRONMENT = Environment(
                             height=screen_h
                         )
 
+C_PLAYER = Player(x=0, y=0, life=0, scr=0, jump=True, height=100, width=50, speed=25)
+
 
 RUN = True
 
@@ -35,7 +38,11 @@ while True:
         if event.type == pg.QUIT:
             RUN = False
 
-    ENVIRONMENT.draw(WINDOW)
+    C_PLAYER.move()
 
+    ENVIRONMENT.draw(WINDOW)
+    C_PLAYER.draw(WINDOW)
+
+    pg.display.update() 
 
 pg.quit()

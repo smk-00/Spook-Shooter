@@ -13,35 +13,48 @@ class Player(object):
         self.hitbox = [self.x, self.y, self.height, self.width]
 
         self.ast_position = 0
-        self.player_assets = ['ast1','ast2','ast3']
+
+        self.player_img = None
+        self.player_assets = ['./assets/player/1.png','./assets/player/2.png','./assets/player/3.png',
+                                './assets/player/4.png','./assets/player/5.png', './assets/player/6.png']
+        self.player = None
+        self.loadcharacter()
+
+    def loadcharacter(self):
+        self.player_img = [pg.image.load(path) for path in self.player_assets]  
+        self.player_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.player_img]
 
     def draw(self,win):
-        if(self.ast_position == 3):
+        if(self.ast_position == 5):
             self.ast_position = 0
-        player = pg.image.load(self.player_assets[self.ast_position])
-        win.blit(player,(self.x, self.y))
-        self.ast_position += 1
-        pg.display.update()
+        if(self.player):
+            win.blit(self.player,(self.x, self.y))
 
     def move(self):
         self.jump = False
-        jumpCount = 20
+        jumpCount = 100
 
         keys = pg.key.get_pressed()
+         
         if keys[pg.K_SPACE]:
             self.jump = True
 
         if keys[pg.K_LEFT] and self.x > self.speed:
             self.x -= self.speed
+            self.ast_position += 1
+            self.player = self.player_img[self.ast_position]
+            self.player = pg.transform.flip(self.player, True, False)
 
         if keys[pg.K_RIGHT] and self.x < 1240 - self.speed - self.width:
             self.x += self.speed
+            self.ast_position += 1
+            self.player = self.player_img[self.ast_position]
 
         if not(self.jump):
             if keys[pg.K_UP] and self.y > self.speed:
-                self.y -= self.speed
+                self.y += self.speed
 
             if keys[pg.K_SPACE]:
                 self.jump = True
         else:
-            jumpCount -= 1
+            self.y += 30          
