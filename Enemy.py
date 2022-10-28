@@ -10,7 +10,7 @@ class Enemy(object):
         self.height = height
         self.width = width
         self.hitbox = [self.x, self.y, self.height, self.width]
-
+        self.eat = pg.mixer.Sound("./asset/enemy/zombie.wav")
         self.ast_position = 0
         self.enemy_assets = images
 
@@ -61,6 +61,7 @@ class Enemy(object):
             #print(C_PLAYER.life)
             if(C_PLAYER.life < 0):
                 C_PLAYER.life_count -= 1
+                self.eat.play()
                 C_PLAYER.life = 10
             if(C_PLAYER.life_count != 0):
                 C_PLAYER.life -= 0.1

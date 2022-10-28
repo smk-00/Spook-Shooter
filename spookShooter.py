@@ -41,7 +41,7 @@ E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=5, speed=6, e_type='z
 loadScreen = pg.image.load("./assets/start/bg.png")
 loadScreen = pg.transform.scale(loadScreen, (screen_w, screen_h))
 hiscores = pickle.load(open('highscore.txt',"rb"))
-
+game_over_music = pg.mixer.Sound("./asset/game_over.wav")
 
 GAME_START = True
 GAME_RUN = False
@@ -77,6 +77,7 @@ while GAME_START:
                 GAME_RUN = False
 
         if C_PLAYER.life_count<=0:
+            game_over_music.play()
             c_score = C_PLAYER.scr
             hiscores.sort()
             for score in hiscores:
@@ -104,6 +105,9 @@ while GAME_START:
             mouse_x, mouse_y = pg.mouse.get_pos()
             if (mouse_x<195 and mouse_x>94) and (mouse_y>595 and mouse_y<640):
                 GAME_RUN = True
+                startTune = pg.mixer.Sound("assets/start/start.wav")
+                startTune.play()
+
             if (mouse_x<1263 and mouse_x>1168) and (mouse_y>596 and mouse_y<720):
                 GAME_START = False
             if (mouse_x<826 and mouse_x>535) and (mouse_y>595 and mouse_y<648):
