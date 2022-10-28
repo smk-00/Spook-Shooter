@@ -9,7 +9,7 @@ class Bullet:
         self.targetCords = targetCords
         self.width = self.height = 25
         self.hitbox = self.cords+[self.width, self.height]
-        self.speed = 25
+        self.speed = 10
 
         self.angle = math.atan2(self.cords[1]-targetCords[1], self.cords[0]-targetCords[0])
         self.x_vel = math.cos(self.angle) * self.speed
@@ -52,11 +52,15 @@ class Weapon:
         mouse_x, mouse_y = pg.mouse.get_pos()    
         for event in pg.event.get():
             if event.type == pg.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    self.bulletsFired.append(Bullet(f"./assets/weapons/{self.bulletName}.png", [self.cords[0], self.cords[0]], [mouse_x, mouse_y]))
+                self.bulletsFired.append(Bullet(f"./assets/weapons/{self.bulletName}.png", [self.cords[0], self.cords[1]], [mouse_x, mouse_y]))
 
     def draw(self, window):
         window.blit(self.gun, self.cords)
         for bullet in self.bulletsFired:
-            bullet.draw(window)
+            if bullet.cords[0]>1366 and bullet.cords[0]<0:
+                del bullet
+            elif bullet.cords[1]>760 and bullet.cords[1]<0:
+                del bullet
+            else:
+                bullet.draw(window)
         
