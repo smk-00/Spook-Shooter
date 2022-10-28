@@ -35,8 +35,11 @@ class Player(object):
         self.hitbox = (self.x, self.y, self.height, self.width)
         self.weapon.checkFire()
         self.weapon.draw(window)
-        text = self.font.render('Life : ' + str(self.life_count), 1, (0,0,0))
-        window.blit(text, (50, 50))
+        text_l = self.font.render('Life : ' + str(self.life_count), 1, (0,0,0))
+        window.blit(text_l, (50, 50))
+
+        text_s = self.font.render('Score : ' + str(self.scr), 1, (255,0,0))
+        window.blit(text_s, (1200, 50))
         if(self.ast_position == 5):
             self.ast_position = 0
         if(self.player):

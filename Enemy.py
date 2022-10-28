@@ -36,9 +36,13 @@ class Enemy(object):
     def move(self,ENVIRONMENT,C_PLAYER):
         for j in C_PLAYER.weapon.bulletsFired:
             if ((self.x > j.cords[0] and self.x < j.cords[0]+j.width) and (self.y < j.cords[1] and self.y > j.cords[1]-j.height)):
-                self.life -= 2
+                self.life -= 5
                 C_PLAYER.weapon.bulletsFired.remove(j)
-    
+        
+                if(self.life == 0):
+                    C_PLAYER.scr += 10
+                else:
+                    C_PLAYER.scr += 5
         if self.y+self.height <= 640:
             self.y += self.speed
         
