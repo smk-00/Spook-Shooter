@@ -4,11 +4,13 @@ from platformSlide import PlatformSlide
 
 
 class Environment:
-    def __init__(self, bgPath, musicPath, level, platformCords) -> None:
+    def __init__(self, bgPath, musicPath, level, platformCords, width, height) -> None:
         self.bg = None
         self.bgPath = bgPath
         self.musicPath = musicPath
         self.level = level
+        self.width = width
+        self.height = height
         self.platformCords = platformCords
         self.platformSlides = []
         self.loadlevel()
@@ -16,6 +18,7 @@ class Environment:
 
     def loadlevel(self):
         self.bg = pg.image.load(self.bgPath)
+        self.bg = pg.transform.scale(self.bg, (self.width, self.height))
         mixer.music.load(self.musicPath)
         mixer.music.play(-1)
 

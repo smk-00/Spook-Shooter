@@ -15,6 +15,7 @@ class PlatformSlide():
 
     def loadPlatformSlide(self):
         self.platformSlide = pg.image.load(self.path)
+        self.platformSlide = pg.transform.scale(self.platformSlide, (self.width, self.height))
 
 
     def draw(self, window):

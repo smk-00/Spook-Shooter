@@ -17,16 +17,25 @@ ENVIRONMENT = Environment(
                             bgPath="./assets/environment/level 1/bg.png",
                             musicPath="./assets/environment/bg_music.mp3",
                             level=1,
-                            platformCords=[[130, 420], [256, 390], [1000, 200], [500, 300], [800, 200]]
+                            platformCords=[[130, 420], [256, 390], [1000, 200], [500, 300], [800, 200]],
+                            width=screen_w,
+                            height=screen_h
                         )
 
 
+RUN = True
 
-def mainGame():
-    while True:
-        ENVIRONMENT.draw(WINDOW)
+while True:
+    if not RUN:
+        break
+    
+    pg.time.delay(200)
 
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            RUN = False
 
-mainGame()
+    ENVIRONMENT.draw(WINDOW)
+
 
 pg.quit()
