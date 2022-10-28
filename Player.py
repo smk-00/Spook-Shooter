@@ -1,12 +1,12 @@
 import pygame as pg
 from weapon import Weapon
 
-
 class Player(object):
-    def __init__(self,height,width,speed):
+    def __init__(self,height,width,speed, font):
         self.x = 20
         self.y = 20
-        self.life = 5
+        self.life = 10
+        self.life_count = 5
         self.scr = 0
         self.jump = False
         self.height = height
@@ -15,6 +15,7 @@ class Player(object):
         self.jumpcount = speed
         self.hitbox = [self.x, self.y, self.height, self.width]
         self.weapon = Weapon("pumpgun", [self.x, self.y])
+        self.font = font
 
         self.ast_position = 0
 
@@ -29,9 +30,13 @@ class Player(object):
         self.player_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.player_img]
 
     def draw(self,window):
+        pg.draw.rect(window, (255,0,0), (30, 30 - 20, 50, 10)) # NEW
+        pg.draw.rect(window, (0,128,0), (30, 30 - 20, 50 - (5 * (10 - self.life)), 10))
+        self.hitbox = (self.x, self.y, self.height, self.width)
         self.weapon.checkFire()
         self.weapon.draw(window)
-
+        text = self.font.render('Life : ' + str(self.life_count), 1, (0,0,0))
+        window.blit(text, (50, 50))
         if(self.ast_position == 5):
             self.ast_position = 0
         if(self.player):
