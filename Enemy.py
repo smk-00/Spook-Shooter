@@ -15,15 +15,49 @@ class Enemy(object):
         self.enemy_assets = images
 
         self.loadcharacter()
+        self.enemy = None
+        self.movew = 'R'
 
     def loadcharacter(self):
         self.enemy_img = [pg.image.load(path) for path in self.enemy_assets]  
         self.enemy_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.enemy_img]
 
     def draw(self,win):
+        pg.draw.rect(win, (255,0,0), (self.hitbox[0], self.hitbox[1] - 20, 50, 10)) # NEW
+        pg.draw.rect(win, (0,128,0), (self.hitbox[0], self.hitbox[1] - 20, 50 - (5 * (10 - self.life)), 10))
+        self.hitbox = (self.x, self.y, 31, 57)
+        #pg.draw.rect(win, (255,0,0), self.hitbox,2)
         if(self.ast_position == 5):
             self.ast_position = 0
-        player = self.enemy_img[self.ast_position%6]
-        win.blit(player,(self.x, self.y))
-        self.ast_position += 1
+        if(self.enemy):
+            win.blit(self.enemy,(self.x, self.y))
         pg.display.update()
+
+    def move(self,ENVIRONMENT,C_PLAYER):
+        if self.y+self.height <= 640:
+            self.y += self.speed
+        
+        if self.x > C_PLAYER.x:
+            self.movew = 'L'            
+        if self.x < C_PLAYER.x:
+            self.movew = 'R'
+
+        if self.movew == 'R':
+            self.enemy = self.enemy_img[self.ast_position%6]
+            self.ast_position += 1
+            self.x += self.speed
+        else:
+            self.enemy = self.enemy_img[self.ast_position%6]
+            self.enemy = pg.transform.flip(self.enemy, True, False) 
+            self.ast_position += 1
+            self.x -= self.speed
+
+        if ((self.x >C_PLAYER.hitbox[0] and self.x < C_PLAYER.hitbox[0]+C_PLAYER.hitbox[2]) and (self.y < C_PLAYER.hitbox[1] and self.y > C_PLAYER.hitbox[3])):
+            print(C_PLAYER.life)
+            if(C_PLAYER.life < 0):
+                C_PLAYER.life_count -= 1
+                C_PLAYER.life = 10
+            if(C_PLAYER.life_count != 0):
+                C_PLAYER.life -= 0.1
+            else:
+                pass # Game over
