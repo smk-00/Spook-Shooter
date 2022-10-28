@@ -29,12 +29,16 @@ class Player(object):
         self.player_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.player_img]
 
     def draw(self,window):
+        self.weapon.checkFire()
+        self.weapon.draw(window)
+
         if(self.ast_position == 5):
             self.ast_position = 0
         if(self.player):
             window.blit(self.player,(self.x, self.y))
 
     def move(self, ENVIRONMENT):
+        self.weapon.attachWithPlayer([self.x, self.y])
         keys = pg.key.get_pressed()
 
         if keys[pg.K_UP]:

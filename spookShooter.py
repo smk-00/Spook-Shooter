@@ -11,7 +11,7 @@ pg.init()
 screen_w = 1366
 screen_h = 720
 
-FPS = 30
+FPS = 60
 clock = pg.time.Clock()
 
 WINDOW = pg.display.set_mode((screen_w,screen_h))
@@ -42,11 +42,8 @@ while True:
             RUN = False
 
     C_PLAYER.move(ENVIRONMENT)
-    C_PLAYER.weapon.attachWithPlayer([C_PLAYER.x, C_PLAYER.y])
-    C_PLAYER.weapon.checkFire()
 
     ENVIRONMENT.draw(WINDOW)
-    C_PLAYER.weapon.draw(WINDOW)
     C_PLAYER.draw(WINDOW)
     E_PLAYER.draw(WINDOW)
 
