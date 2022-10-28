@@ -28,3 +28,4 @@ class Environment:
         window.blit(self.bg, (0, 0))
         for platformSlide in self.platformSlides:
             platformSlide.draw(window)
+        pg.display.update()

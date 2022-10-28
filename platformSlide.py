@@ -19,3 +19,4 @@ class PlatformSlide():
 
     def draw(self, window):
         window.blit(self.platformSlide, self.cords)
+        pg.display.update()
