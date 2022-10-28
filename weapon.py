@@ -10,6 +10,7 @@ class Bullet:
         self.width = self.height = 25
         self.hitbox = self.cords+[self.width, self.height]
         self.speed = 10
+        self.shootSound = pg.mixer.Sound("./assets/bullet.wav")
 
         self.angle = math.atan2(self.cords[1]-targetCords[1], self.cords[0]-targetCords[0])
         self.x_vel = math.cos(self.angle) * self.speed
@@ -53,6 +54,7 @@ class Weapon:
         for event in pg.event.get():
             if event.type == pg.MOUSEBUTTONDOWN:
                 self.bulletsFired.append(Bullet(f"./assets/weapons/{self.bulletName}.png", [self.cords[0], self.cords[1]], [mouse_x, mouse_y]))
+                self.shootSound.play()
 
     def draw(self, window):
         window.blit(self.gun, self.cords)
