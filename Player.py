@@ -1,4 +1,6 @@
 import pygame as pg
+from weapon import Weapon
+
 
 class Player(object):
     def __init__(self,height,width,speed):
@@ -12,6 +14,7 @@ class Player(object):
         self.speed = speed
         self.jumpcount = speed
         self.hitbox = [self.x, self.y, self.height, self.width]
+        self.weapon = Weapon("pumpgun", [self.x, self.y])
 
         self.ast_position = 0
 
@@ -25,11 +28,12 @@ class Player(object):
         self.player_img = [pg.image.load(path) for path in self.player_assets]  
         self.player_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.player_img]
 
-    def draw(self,win):
+    def draw(self,window):
+        self.weapon.draw(window)
         if(self.ast_position == 5):
             self.ast_position = 0
         if(self.player):
-            win.blit(self.player,(self.x, self.y))
+            window.blit(self.player,(self.x, self.y))
 
     def move(self):
         keys = pg.key.get_pressed()
