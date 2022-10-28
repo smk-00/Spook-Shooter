@@ -10,7 +10,6 @@ class Bullet:
         self.width = self.height = 25
         self.hitbox = self.cords+[self.width, self.height]
         self.speed = 10
-        self.shootSound = pg.mixer.Sound("./assets/bullet.wav")
 
         self.angle = math.atan2(self.cords[1]-targetCords[1], self.cords[0]-targetCords[0])
         self.x_vel = math.cos(self.angle) * self.speed
@@ -36,6 +35,7 @@ class Weapon:
         self.bulletsFired = []
         self.gun = None
         self.bulletName = None
+        self.shootSound = pg.mixer.Sound("./assets/bullet.wav")
         self.loadWeapon()
 
 
