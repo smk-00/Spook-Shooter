@@ -1,5 +1,8 @@
 import pygame as pg
 
+
+from boost import Boost
+
 class Enemy(object):
     def __init__(self,x,y,life,speed,e_type,height,width,images):
         self.x = x

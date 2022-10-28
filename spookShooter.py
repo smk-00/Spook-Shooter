@@ -6,6 +6,7 @@ import pickle
 
 from environment import Environment
 from player import Player
+from boost import Boost
 from enemy import Enemy
 
 # pygame init
@@ -33,7 +34,10 @@ ENVIRONMENT = Environment(
 C_PLAYER = Player(height=100, width=50, speed=10, font=font)
 
 ENEMYS = []
+BOOSTS = []
+
 for i in range(6):
+    BOOSTS.append(Boost())
     if(i%2):
         E_PLAYER_M = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(2, 7), e_type='zombie', height=180, width=60,
                    images=['./assets/enemy/zombie_m/1.png','./assets/enemy/zombie_m/2.png','./assets/enemy/zombie_m/3.png','./assets/enemy/zombie_m/4.png','./assets/enemy/zombie_m/5.png','./assets/enemy/zombie_m/6.png'])
@@ -80,6 +84,9 @@ while GAME_START:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 GAME_RUN = False
+
+        for h in BOOSTS:
+            h.draw(WINDOW)
 
         if C_PLAYER.life_count<=0:
             game_over_music.play()
