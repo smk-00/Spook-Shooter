@@ -14,10 +14,16 @@ class Enemy(object):
         self.ast_position = 0
         self.enemy_assets = images
 
+        self.loadcharacter()
+
+    def loadcharacter(self):
+        self.enemy_img = [pg.image.load(path) for path in self.enemy_assets]  
+        self.enemy_img = [pg.transform.scale(img, (self.width, self.height)) for img in self.enemy_img]
+
     def draw(self,win):
-        if(self.ast_position == 3):
+        if(self.ast_position == 5):
             self.ast_position = 0
-        player = pg.image.load(self.enemy_assets[self.ast_position])
+        player = self.enemy_img[self.ast_position%6]
         win.blit(player,(self.x, self.y))
         self.ast_position += 1
         pg.display.update()

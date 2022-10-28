@@ -1,7 +1,9 @@
 import pygame as pg
+import random
+
 from environment import Environment
 from player import Player
-
+from enemy import Enemy
 
 # pygame init
 pg.init()
@@ -24,7 +26,8 @@ ENVIRONMENT = Environment(
                         )
 
 C_PLAYER = Player(height=100, width=50, speed=10)
-
+E_PLAYER = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=15, e_type='zombie', height=100, width=60,
+                   images=['./assets/enemy/zombie_m/1.png','./assets/enemy/zombie_m/2.png','./assets/enemy/zombie_m/3.png','./assets/enemy/zombie_m/4.png','./assets/enemy/zombie_m/5.png','./assets/enemy/zombie_m/6.png'])
 
 RUN = True
 
@@ -45,6 +48,7 @@ while True:
     ENVIRONMENT.draw(WINDOW)
     C_PLAYER.weapon.draw(WINDOW)
     C_PLAYER.draw(WINDOW)
+    E_PLAYER.draw(WINDOW)
 
     pg.display.update() 
 
