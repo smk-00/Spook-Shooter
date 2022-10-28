@@ -1,7 +1,7 @@
 import pygame as pg
 
 class Enemy(object):
-    def __init__(self,x,y,life,speed,image,e_type):
+    def __init__(self,x,y,life,speed,e_type,height,width,images):
         self.x = x
         self.y = y
         self.life = life
@@ -12,7 +12,7 @@ class Enemy(object):
         self.hitbox = [self.x, self.y, self.height, self.width]
 
         self.ast_position = 0
-        self.enemy_assets = image
+        self.enemy_assets = images
 
     def draw(self,win):
         if(self.ast_position == 3):

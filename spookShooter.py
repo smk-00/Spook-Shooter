@@ -13,7 +13,7 @@ pg.display.set_caption("Soppky Shooter")
 
 # Game instance
 
-ENVIRONMENT = Environment(floorPath="./assets/environment/floor.png", musicPath="./assets/environment/bg_music.mp3")
+ENVIRONMENT = Environment(bgPath="./assets/environment/level 1/bg.png", musicPath="./assets/environment/bg_music.mp3")
 
 
 

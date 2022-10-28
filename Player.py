@@ -1,7 +1,7 @@
 import pygame as pg
 
 class Player(object):
-    def __init__(self,x,y,life,height,width,scr,speed,jump):
+    def __init__(self,x,y,life,scr,jump,height,width,speed):
         self.x = x
         self.y = y
         self.life = life
