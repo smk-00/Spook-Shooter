@@ -78,7 +78,8 @@ while GAME_START:
         E_PLAYER_M.draw(WINDOW)
         E_PLAYER_F.draw(WINDOW)
 
-
+        E_PLAYER_M.move(ENVIRONMENT, C_PLAYER)
+        E_PLAYER_F.move(ENVIRONMENT, C_PLAYER) 
         pg.display.update()
 
     for event in pg.event.get():
