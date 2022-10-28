@@ -13,14 +13,20 @@ pg.display.set_caption("Soppky Shooter")
 
 # Game instance
 
-ENVIRONMENT = Environment(bgPath="./assets/environment/level 1/bg.png", musicPath="./assets/environment/bg_music.mp3")
+ENVIRONMENT = Environment(
+                            bgPath="./assets/environment/level 1/bg.png",
+                            musicPath="./assets/environment/bg_music.mp3",
+                            level=1,
+                            platformCords=[[130, 420], [256, 390], [1000, 200], [500, 300], [800, 200]]
+                        )
 
 
 
 def mainGame():
     while True:
-        ENVIRONMENT.draw()
+        ENVIRONMENT.draw(WINDOW)
 
 
+mainGame()
 
 pg.quit()

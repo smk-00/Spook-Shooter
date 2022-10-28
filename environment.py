@@ -1,16 +1,16 @@
 import pygame as pg
 from pygame import mixer
-from platform import Platform
+from platformSlide import PlatformSlide
+
 
 class Environment:
-    def __init__(self, bgPath, musicPath, platformsPaths, platformCords) -> None:
+    def __init__(self, bgPath, musicPath, level, platformCords) -> None:
         self.bg = None
         self.bgPath = bgPath
         self.musicPath = musicPath
-        self.level = 1
-        self.platformsPaths = platformsPaths
+        self.level = level
         self.platformCords = platformCords
-        self.platforms = []
+        self.platformSlides = []
         self.loadlevel()
 
 
@@ -19,12 +19,12 @@ class Environment:
         mixer.music.load(self.musicPath)
         mixer.music.play(-1)
 
-        for platformPath, platformCord in zip(self.platformsPaths,self.platformCords):
-            self.platforms.append(Platform(platformPath, platformCord))
+        for i, platformCord in enumerate(self.platformCords):
+            self.platformSlides.append(PlatformSlide(f"./assets/environment/level {self.level}/platform{i+1}.png", platformCord))
 
 
 
     def draw(self, window):
         window.blit(self.bg, (0, 0))
-        for platform in self.platforms:
-            platform.draw(window)
+        for platformSlide in self.platformSlides:
+            platformSlide.draw(window)
