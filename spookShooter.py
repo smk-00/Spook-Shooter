@@ -45,11 +45,26 @@ hiscores = pickle.load(open('highscore.txt',"rb"))
 
 GAME_START = True
 GAME_RUN = False
-
+highscorePage = False
 
 while GAME_START:
     WINDOW.blit(loadScreen, (0,0))
     pg.display.update()
+
+    while highscorePage:
+        WINDOW.fill((23,23,23))
+        WINDOW.blit(font.render(("Highscores"),36,(255,255,255)), (600, 200))
+        scrs = []
+        for i, score in enumerate(hiscores):
+            WINDOW.blit(font.render((f"{i+1}. {score}"),18,(255,255,255)), (700, 250+(25*(i+1))))
+
+        WINDOW.blit(font.render(("back"),18,(255,255,255)), (612, 520))
+        
+        pg.display.update()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                highscorePage = False
+
 
     while GAME_RUN:
         clock.tick(FPS)
@@ -91,15 +106,7 @@ while GAME_START:
             if (mouse_x<1263 and mouse_x>1168) and (mouse_y>596 and mouse_y<720):
                 GAME_START = False
             if (mouse_x<826 and mouse_x>535) and (mouse_y>595 and mouse_y<648):
-                GAME_START = False
-                WINDOW.fill((23,23,23))
-                WINDOW.blit(font.render(("Highscores"),18,(255,255,255)), (600, 300))
-                scrs = []
-                for i, score in enumerate(hiscores):
-                    WINDOW.blit(font.render((f"{i+1}. {score}"),18,(255,255,255)), (700, 400+(10*(i+1))))
+                highscorePage = True
 
-                WINDOW.blit(font.render(("back"),18,(255,255,255)), (612, 520))
-                if (mouse_x<680 and mouse_x>520) and (mouse_y>612 and mouse_y<540):
-                    GAME_START = True
 
 pg.quit()
