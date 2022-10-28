@@ -1,4 +1,5 @@
 # SPOOK SHOOTER
+Developed by **Tech Creed**
 The 2-D platformer shooting game with the spooky enemies and sound effects developed in pygame. </br>
 It is with the menu bar, high scores page. </br>
 Screenshots are attached here for reference. </br>
