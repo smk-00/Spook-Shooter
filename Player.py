@@ -1,15 +1,16 @@
 import pygame as pg
 
 class Player(object):
-    def __init__(self,x,y,life,scr,jump,height,width,speed):
-        self.x = x
-        self.y = y
-        self.life = life
-        self.scr = scr
-        self.jump = jump
+    def __init__(self,height,width,speed):
+        self.x = 20
+        self.y = 20
+        self.life = 5
+        self.scr = 0
+        self.jump = False
         self.height = height
         self.width = width
         self.speed = speed
+        self.jumpcount = speed
         self.hitbox = [self.x, self.y, self.height, self.width]
 
         self.ast_position = 0
@@ -31,9 +32,6 @@ class Player(object):
             win.blit(self.player,(self.x, self.y))
 
     def move(self):
-        self.jump = False
-        jumpCount = 10
-
         keys = pg.key.get_pressed()
          
         if keys[pg.K_SPACE]:
@@ -50,19 +48,17 @@ class Player(object):
             self.ast_position += 1
             self.player = self.player_img[self.ast_position%6]
             
-        if not(self.jump): 
-            if keys[pg.K_UP] and self.y > self.speed:
-                self.y -= self.speed
-
-            if self.y < 680 - self.height - self.speed:
-                self.y += self.speed
-
-            if keys[pg.K_SPACE]:
-                self.jump = True
-        else:
-            if jumpCount > -10:
-                self.y -= (jumpCount * abs(jumpCount)) * 0.5
-                jumpCount -= 1
-            else: 
-                jumpCount = 10
+        if self.jump:
+            if self.jumpcount >= -self.speed:
+                neg = 1
+                if self.jumpcount < 0:
+                    neg = -1
+                self.y -= (self.jumpcount **2) * 0.5* neg
+                self.jumpcount -= 1
+            else:
                 self.jump = False
+                self.jumpcount = self.speed
+
+        else:
+            if self.y+self.height <= 640:
+                self.y += self.speed

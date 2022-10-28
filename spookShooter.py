@@ -16,7 +16,6 @@ WINDOW = pg.display.set_mode((screen_w,screen_h))
 pg.display.set_caption("Soppky Shooter")
 
 # Game instance
-
 ENVIRONMENT = Environment(
                             musicPath="./assets/environment/bg_music.mp3",
                             level=1,
@@ -24,7 +23,7 @@ ENVIRONMENT = Environment(
                             height=screen_h
                         )
 
-C_PLAYER = Player(x=0, y=0, life=0, scr=0, jump=True, height=100, width=50, speed=10)
+C_PLAYER = Player(height=100, width=50, speed=10)
 
 
 RUN = True
