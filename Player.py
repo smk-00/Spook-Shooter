@@ -64,8 +64,8 @@ class Player(object):
                 self.y += self.speed
         
         for i in range(len(ENVIRONMENT.platformSlides)):
-            if ((self.x > ENVIRONMENT.platformSlides[i].hitbox[0] and self.x < ENVIRONMENT.platformSlides[i].hitbox[0]+ENVIRONMENT.platformSlides[i].hitbox[2]) and (self.y < ENVIRONMENT.platformSlides[i].hitbox[1])):
+            if ((self.x > ENVIRONMENT.platformSlides[i].hitbox[0] and self.x < ENVIRONMENT.platformSlides[i].hitbox[0]+ENVIRONMENT.platformSlides[i].hitbox[2]) and (self.y < ENVIRONMENT.platformSlides[i].hitbox[1] and self.y > ENVIRONMENT.platformSlides[i].hitbox[1]-ENVIRONMENT.platformSlides[i].hitbox[3])):
                 if keys[pg.K_UP]:
                     self.jump = True
                 else:
-                    self.y = ENVIRONMENT.platformSlides[i].hitbox[1] - ENVIRONMENT.platformSlides[i].hitbox[3] - 20
+                    self.y = ENVIRONMENT.platformSlides[i].hitbox[1] - ENVIRONMENT.platformSlides[i].hitbox[3]
