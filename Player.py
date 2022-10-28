@@ -45,16 +45,17 @@ class Player(object):
             self.player = self.player_img[self.ast_position]
             self.player = pg.transform.flip(self.player, True, False)
 
-        if keys[pg.K_RIGHT] and self.x < 1240 - self.speed - self.width:
+        if keys[pg.K_RIGHT] and self.x < 1366 - self.speed - self.width:
             self.x += self.speed
             self.ast_position += 1
             self.player = self.player_img[self.ast_position]
 
-        if not(self.jump):
+        if self.jump:
             if keys[pg.K_UP] and self.y > self.speed:
                 self.y += self.speed
 
             if keys[pg.K_SPACE]:
-                self.jump = True
+                self.jump = False
         else:
-            self.y += 30          
+            if self.y < 665 - self.height:
+                self.y += self.speed          

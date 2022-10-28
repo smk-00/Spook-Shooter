@@ -24,7 +24,7 @@ ENVIRONMENT = Environment(
                             height=screen_h
                         )
 
-C_PLAYER = Player(x=0, y=0, life=0, scr=0, jump=True, height=100, width=50, speed=25)
+C_PLAYER = Player(x=0, y=0, life=0, scr=0, jump=True, height=100, width=50, speed=5)
 
 
 RUN = True
