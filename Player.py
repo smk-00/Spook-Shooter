@@ -1,11 +1,12 @@
 import pygame as pg
 
 class Player(object):
-    def __init__(self,x,y,life,height,width,scr,speed):
+    def __init__(self,x,y,life,height,width,scr,speed,jump):
         self.x = x
         self.y = y
         self.life = life
         self.scr = scr
+        self.jump = jump
         self.height = height
         self.width = width
         self.speed = speed
@@ -17,30 +18,30 @@ class Player(object):
     def draw(self,win):
         if(self.ast_position == 3):
             self.ast_position = 0
-        player = pygame.image.load(self.player_assets[self.ast_position])
+        player = pg.image.load(self.player_assets[self.ast_position])
         win.blit(player,(self.x, self.y))
         self.ast_position += 1
         pg.display.update()
 
     def move(self):
+        self.jump = False
+        jumpCount = 20
+
         keys = pg.key.get_pressed()
-        if keys[pg.K_LEFT] and keys[pg.K_UP]:
+        if keys[pg.K_SPACE]:
+            self.jump = True
+
+        if keys[pg.K_LEFT] and self.x > self.speed:
             self.x -= self.speed
-            self.y -= self.speed 
-        elif keys[pg.K_RIGHT] and keys[pg.K_UP]:
+
+        if keys[pg.K_RIGHT] and self.x < 1240 - self.speed - self.width:
             self.x += self.speed
-            self.y -= self.speed
-        elif keys[pg.K_LEFT] and keys[pg.K_DOWN]:
-            self.x -= self.speed
-            self.y += self.speed
-        elif keys[pg.K_RIGHT] and keys[pg.K_UP]:
-            self.x += self.speed
-            self.y += self.speed
-        elif keys[pg.K_LEFT]:
-            self.x -= self.speed
-        elif keys[pg.K_RIGHT]:
-            self.x += self.speed
-        elif keys[pg.K_UP]:
-            self.y -= self.speed
-        elif keys[pg.K_DOWN]:
-            self.y += self.speed
+
+        if not(self.jump):
+            if keys[pg.K_UP] and self.y > self.speed:
+                self.y -= self.speed
+
+            if keys[pg.K_SPACE]:
+                self.jump = True
+        else:
+            jumpCount -= 1
