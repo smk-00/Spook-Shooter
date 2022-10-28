@@ -56,7 +56,7 @@ class Weapon:
                     self.bulletsFired.append(Bullet(f"./assets/weapons/{self.bulletName}.png", [self.cords[0], self.cords[0]], [mouse_x, mouse_y]))
 
     def draw(self, window):
-        self.checkFire()
         window.blit(self.gun, self.cords)
         for bullet in self.bulletsFired:
             bullet.draw(window)
+        
