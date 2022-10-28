@@ -38,7 +38,7 @@ while True:
         if event.type == pg.QUIT:
             RUN = False
 
-    C_PLAYER.move()
+    C_PLAYER.move(ENVIRONMENT)
 
     ENVIRONMENT.draw(WINDOW)
     C_PLAYER.draw(WINDOW)
