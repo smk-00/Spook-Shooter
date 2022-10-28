@@ -32,30 +32,37 @@ class Player(object):
 
     def move(self):
         self.jump = False
-        jumpCount = 100
+        jumpCount = 10
 
         keys = pg.key.get_pressed()
          
         if keys[pg.K_SPACE]:
             self.jump = True
 
-        if keys[pg.K_LEFT] and self.x > self.speed:
+        if keys[pg.K_LEFT] and self.x > self.speed: 
             self.x -= self.speed
             self.ast_position += 1
-            self.player = self.player_img[self.ast_position]
-            self.player = pg.transform.flip(self.player, True, False)
+            self.player = self.player_img[self.ast_position%6]
+            self.player = pg.transform.flip(self.player, True, False) 
 
-        if keys[pg.K_RIGHT] and self.x < 1366 - self.speed - self.width:
+        if keys[pg.K_RIGHT] and self.x < 1366 - self.speed - self.width:  
             self.x += self.speed
             self.ast_position += 1
-            self.player = self.player_img[self.ast_position]
-
-        if self.jump:
+            self.player = self.player_img[self.ast_position%6]
+            
+        if not(self.jump): 
             if keys[pg.K_UP] and self.y > self.speed:
+                self.y -= self.speed
+
+            if self.y < 680 - self.height - self.speed:
                 self.y += self.speed
 
             if keys[pg.K_SPACE]:
-                self.jump = False
+                self.jump = True
         else:
-            if self.y < 665 - self.height:
-                self.y += self.speed          
+            if jumpCount > -10:
+                self.y -= (jumpCount * abs(jumpCount)) * 0.5
+                jumpCount -= 1
+            else: 
+                jumpCount = 10
+                self.jump = False
