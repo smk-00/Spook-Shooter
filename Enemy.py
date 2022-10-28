@@ -10,7 +10,7 @@ class Enemy(object):
         self.height = height
         self.width = width
         self.hitbox = [self.x, self.y, self.height, self.width]
-        self.eat = pg.mixer.Sound("./asset/enemy/zombie.wav")
+        self.eat = pg.mixer.Sound("./assets/enemy/zombie.wav")
         self.ast_position = 0
         self.enemy_assets = images
 

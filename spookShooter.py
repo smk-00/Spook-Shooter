@@ -46,7 +46,7 @@ for i in range(6):
 loadScreen = pg.image.load("./assets/start/bg.png")
 loadScreen = pg.transform.scale(loadScreen, (screen_w, screen_h))
 hiscores = pickle.load(open('highscore.txt',"rb"))
-game_over_music = pg.mixer.Sound("./asset/game_over.wav")
+game_over_music = pg.mixer.Sound("./assets/game_over.wav")
 
 GAME_START = True
 GAME_RUN = False
@@ -89,8 +89,12 @@ while GAME_START:
                 if c_score>score:
                     hiscores.append(score)
             hiscores.sort()
-            pickle.dump(hiscores[:5],open('highscore.txt',"wb"))
+            if len(hiscores)>5:
+                pickle.dump(hiscores[:5],open('highscore.txt',"wb"))
             GAME_RUN = False
+            C_PLAYER.scr = 0
+            C_PLAYER.life_count = 3
+            C_PLAYER.life = 10
 
         C_PLAYER.move(ENVIRONMENT)
 
