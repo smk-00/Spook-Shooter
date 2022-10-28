@@ -156,5 +156,4 @@ while GAME_START:
             if (mouse_x<826 and mouse_x>535) and (mouse_y>595 and mouse_y<648):
                 highscorePage = True
 
-
 pg.quit()
