@@ -19,7 +19,7 @@ pg.display.set_caption("Soppky Shooter")
 
 ENVIRONMENT = Environment(
                             musicPath="./assets/environment/bg_music.mp3",
-                            level=3,
+                            level=1,
                             width=screen_w,
                             height=screen_h
                         )
