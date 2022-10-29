@@ -49,7 +49,13 @@ for i in range(6):
 
 loadScreen = pg.image.load("./assets/start/bg.png")
 loadScreen = pg.transform.scale(loadScreen, (screen_w, screen_h))
-hiscores = pickle.load(open('highscore.txt',"rb"))
+
+hiscores = pickle.load(open('highscore',"rb"))
+hiscores = list(hiscores)
+print(hiscores)
+for i, score in enumerate(hiscores):
+    hiscores[i] = int(score)
+
 game_over_music = pg.mixer.Sound("./assets/game_over.wav")
 
 GAME_START = True
@@ -65,9 +71,9 @@ while GAME_START:
         WINDOW.blit(font.render(("Highscores"),36,(255,255,255)), (600, 200))
         scrs = []
         for i, score in enumerate(hiscores):
-            WINDOW.blit(font.render((f"{i+1}. {score}"),18,(255,255,255)), (700, 250+(25*(i+1))))
+            if i < 5:
+                WINDOW.blit(font.render((f"{i+1}. {score}"),18,(255,255,255)), (700, 250+(25*(i+1))))
 
-        WINDOW.blit(font.render(("back"),18,(255,255,255)), (612, 520))
 
         pg.display.update()
         for event in pg.event.get():
@@ -87,17 +93,21 @@ while GAME_START:
 
         for h in BOOSTS:
             h.draw(WINDOW)
+            pg.display.update()
+
 
         if C_PLAYER.life_count<=0:
             game_over_music.play()
             c_score = C_PLAYER.scr
             hiscores.sort()
-            for score in hiscores:
-                if c_score>score:
-                    hiscores.append(score)
-            hiscores.sort()
+            for p in range(5):
+                if c_score>hiscores[p]:
+                    hiscores.append(c_score)
+                    break
+                
+            hiscores.sort(reverse=True)
             if len(hiscores)>5:
-                pickle.dump(hiscores[:5],open('highscore.txt',"wb"))
+                pickle.dump(hiscores[:5],open('highscore',"wb"))
             GAME_RUN = False
             C_PLAYER.scr = 0
             C_PLAYER.life_count = 3

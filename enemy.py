@@ -49,10 +49,16 @@ class Enemy(object):
         if self.y+self.height <= 640:
             self.y += self.speed
         
-        if self.x > C_PLAYER.x:
-            self.movew = 'L'            
-        if self.x < C_PLAYER.x:
-            self.movew = 'R'
+        if C_PLAYER.y < 540:
+            if self.x > 1366:
+                self.movew = 'L'            
+            if self.x < 0:
+                self.movew = 'R'
+        else:
+            if self.x > C_PLAYER.x:
+                self.movew = 'L'            
+            if self.x < C_PLAYER.x:
+                self.movew = 'R'
 
         if self.movew == 'R':
             self.enemy = self.enemy_img[self.ast_position%6]

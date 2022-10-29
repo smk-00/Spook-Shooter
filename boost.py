@@ -6,8 +6,8 @@ class Boost:
         self.paths = ["purple", "teal", "yellow"]
         self.candy = None
         self.boost = 0
-        self.x = random.randint(10, 520)
-        self.y = random.randint(-10, 100)
+        self.x = random.randint(10, 1366)
+        self.y = -20
     
         self.loadCandy()
 
@@ -19,8 +19,9 @@ class Boost:
             self.boost = 2
 
         self.candy = pg.image.load(f"./assets/boosts/{self.paths[path]}.png")
+        self.candy = pg.transform.scale(self.candy, (30,30))
 
     def draw(self,win):
-        win.blit(self.candy,(self.x, self.y))
+        win.blit(self.candy, (self.x, self.y))
         if self.y+20 <= 640:
             self.y += 5
