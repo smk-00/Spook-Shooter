@@ -49,18 +49,24 @@ class Player(object):
         self.weapon.attachWithPlayer([self.x, self.y])
         keys = pg.key.get_pressed()
 
-        if keys[pg.K_UP]:
+        if keys[pg.K_UP] or keys[pg.K_w]:
             self.jump = True
 
-        if keys[pg.K_LEFT] and self.x > self.speed: 
+        if (keys[pg.K_LEFT] or keys[pg.K_a]) and self.x > self.speed: 
             self.x -= self.speed
             self.ast_position += 1
             self.player = self.player_img[self.ast_position%6]
-            self.player = pg.transform.flip(self.player, True, False) 
+            self.player = pg.transform.flip(self.player, True, False)
 
-        if keys[pg.K_RIGHT] and self.x < 1366 - self.speed - self.width:  
+            self.weapon.gun = pg.image.load("./assets/weapons/pumpgun.png")
+            self.weapon.gun = pg.transform.scale(self.weapon.gun, (60, 60))
+            self.weapon.gun = pg.transform.flip(self.weapon.gun, True, False)
+
+        if (keys[pg.K_RIGHT] or keys[pg.K_d]) and self.x < 1366 - self.speed - self.width:  
             self.x += self.speed
             self.ast_position += 1
+            self.weapon.gun = pg.image.load("./assets/weapons/pumpgun.png")
+            self.weapon.gun = pg.transform.scale(self.weapon.gun, (60, 60))
             self.player = self.player_img[self.ast_position%6]
             
         if self.jump:

@@ -91,10 +91,16 @@ while GAME_START:
             if event.type == pg.QUIT:
                 GAME_RUN = False
 
-        for h in BOOSTS:
-            h.draw(WINDOW)
-            pg.display.update()
+        if(len(BOOSTS) <= 1):
+            BOOSTS.append(Boost())
+            BOOSTS.append(Boost())
 
+        for h in BOOSTS:
+            if(h.n_taken):
+                h.draw(WINDOW, C_PLAYER)
+            else:
+                BOOSTS.remove(h)
+            pg.display.update()
 
         if C_PLAYER.life_count<=0:
             game_over_music.play()
