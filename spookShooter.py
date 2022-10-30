@@ -1,5 +1,5 @@
 from json import load
-from tkinter import W
+from tkinter import CURRENT, W
 import pygame as pg
 import random
 import pickle
@@ -126,7 +126,15 @@ while GAME_START:
 
         if(len(ENEMYS) == 0):
             ENVIRONMENT.level += 1
-            ENVIRONMENT.loadlevel()
+            if(ENVIRONMENT.level == 4):
+                ENVIRONMENT.level = 1
+                GAME_RUN = False
+                C_PLAYER.life = 10
+                C_PLAYER.life_count = 5
+                C_PLAYER.scr = 0
+
+            if(GAME_RUN): 
+                ENVIRONMENT.loadlevel()
             for i in range(6):
                 if(ENVIRONMENT.level == 2):
                     if(i%2):
