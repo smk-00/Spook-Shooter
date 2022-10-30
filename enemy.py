@@ -1,3 +1,4 @@
+from random import random
 import pygame as pg
 
 class Enemy(object):
@@ -76,4 +77,4 @@ class Enemy(object):
             if(C_PLAYER.life_count != 0):
                 C_PLAYER.life -= 0.1
             else:
-                pass # Game over
+                C_PLAYER.y = 0 

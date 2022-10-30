@@ -124,11 +124,18 @@ while GAME_START:
         ENVIRONMENT.draw(WINDOW)
         C_PLAYER.draw(WINDOW)
 
+        for o in ENEMYS:
+            if(o.life == 0):
+                ENEMYS.remove(o)
+
+            o.draw(WINDOW)
+            o.move(ENVIRONMENT, C_PLAYER)
+
         if(len(ENEMYS) == 0):
             ENVIRONMENT.level += 1
             if(ENVIRONMENT.level == 4):
-                ENVIRONMENT.level = 1
                 GAME_RUN = False
+                ENVIRONMENT.level = 1
                 C_PLAYER.life = 10
                 C_PLAYER.life_count = 5
                 C_PLAYER.scr = 0
@@ -153,15 +160,7 @@ while GAME_START:
                     else:
                         E_PLAYER_F = Enemy(x=random.randint(100, 800), y=-15, life=10, speed=random.randint(5, 7), e_type='zombie', height=100, width=60,
                                 images=['./assets/enemy/zombie_f/1.png','./assets/enemy/zombie_f/2.png','./assets/enemy/zombie_f/3.png','./assets/enemy/zombie_f/4.png','./assets/enemy/zombie_f/5.png','./assets/enemy/zombie_f/6.png'])
-                        ENEMYS.append(E_PLAYER_F)
-
-        for o in ENEMYS:
-            if(o.life == 0):
-                ENEMYS.remove(o)
-                break
-
-            o.draw(WINDOW)
-            o.move(ENVIRONMENT, C_PLAYER) 
+                        ENEMYS.append(E_PLAYER_F) 
 
         pg.display.update()
 

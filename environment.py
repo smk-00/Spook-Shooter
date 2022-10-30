@@ -48,6 +48,6 @@ class Environment:
 
     def draw(self, window):
         window.blit(self.bg, (0, 0))
-        window.blit(self.bench, self.benchCords)
+        #window.blit(self.bench, self.benchCords)
         for platformSlide in self.platformSlides:
             platformSlide.draw(window)
