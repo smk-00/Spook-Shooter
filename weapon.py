@@ -57,7 +57,7 @@ class Weapon:
                 self.shootSound.play()
 
     def draw(self, window):
-        window.blit(self.gun, self.cords)
+        window.blit(self.gun, (self.cords[0],self.cords[1]))
         for bullet in self.bulletsFired:
             if bullet.cords[0]>1366 and bullet.cords[0]<0:
                 del bullet

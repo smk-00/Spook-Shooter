@@ -1,7 +1,5 @@
+from random import random
 import pygame as pg
-
-
-from boost import Boost
 
 class Enemy(object):
     def __init__(self,x,y,life,speed,e_type,height,width,images):
@@ -38,7 +36,7 @@ class Enemy(object):
 
     def move(self,ENVIRONMENT,C_PLAYER):
         for j in C_PLAYER.weapon.bulletsFired:
-            if ((self.x > j.cords[0] and self.x < j.cords[0]+j.width) and (self.y < j.cords[1] and self.y > j.cords[1]-j.height)):
+            if ((self.x > j.cords[0] and self.x < j.cords[0]+j.width) and (self.y < j.cords[1] and self.y + 600 > j.cords[1]+j.height)):
                 self.life -= 5
                 C_PLAYER.weapon.bulletsFired.remove(j)
         
@@ -48,7 +46,7 @@ class Enemy(object):
                     C_PLAYER.scr += 5
         if self.y+self.height <= 640:
             self.y += self.speed
-        
+
         if C_PLAYER.y < 540:
             if self.x > 1366:
                 self.movew = 'L'            
@@ -79,4 +77,4 @@ class Enemy(object):
             if(C_PLAYER.life_count != 0):
                 C_PLAYER.life -= 0.1
             else:
-                pass # Game over
+                C_PLAYER.y = 0 

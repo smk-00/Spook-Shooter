@@ -22,7 +22,7 @@ class Environment:
         self.bg = pg.transform.scale(self.bg, (self.width, self.height))
                 
         self.bench = pg.image.load(f"./assets/environment/level {self.level}/bench.png")
-
+        self.platformCords = []
         mixer.music.load(self.musicPath)
         mixer.music.play(-1)
 
@@ -48,6 +48,6 @@ class Environment:
 
     def draw(self, window):
         window.blit(self.bg, (0, 0))
-        window.blit(self.bench, self.benchCords)
+        #window.blit(self.bench, self.benchCords)
         for platformSlide in self.platformSlides:
             platformSlide.draw(window)
